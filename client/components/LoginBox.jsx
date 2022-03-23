@@ -15,13 +15,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.storeUserData(username));
   }, 
   
-  dispatchAddFavorite: (location) => {
-    dispatch(actions.addFavorite(location));
-  },
+  // dispatchAddFavorite: (location) => {
+  //   dispatch(actions.addFavorite(location));
+  // },
 
-  dispatchUpdateFavorites: (locationsArray) => {
-    dispatch(actions.updateFavorites(locationsArray));
-  }
+  // dispatchUpdateFavorites: (locationsArray) => {
+  //   dispatch(actions.updateFavorites(locationsArray));
+  // }
 });
 
 class LoginBox extends Component {
