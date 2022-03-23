@@ -90,11 +90,11 @@ module.exports = {
     },
     compress: true,
     port: 8080, 
-    proxy: {
-      '/user': {
+    proxy: [
+      {
+        context: ['/user', '/api'],
         target: 'http://localhost:3000',
-        secure: false,
-      }
-    }
+      },
+    ]
   }  
 }
