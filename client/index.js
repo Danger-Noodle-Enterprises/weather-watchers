@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import App from './App.js';
 import store from './store/store.js';
 
+//might need to bring over browser router for cookies
+
 // const pages = {
 //   loginPage: <Login />,
 //   signupPage:<Signup />,

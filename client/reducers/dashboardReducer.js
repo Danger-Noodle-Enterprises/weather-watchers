@@ -9,7 +9,9 @@ const initialState = {
     currentTemp: '', 
     currentAQI: '', 
     currentWindSpeed: '',
-    favorites: []
+    currentWeather: '', // added 
+    reminders: [], // added
+    //favorites: [] 
 };
 
 // {
