@@ -2,7 +2,9 @@
 const { Pool } = require('pg');
 const { AsyncDependenciesBlock } = require('webpack');
 // create a PG URI to store the key to our database on Elephant SQL
-const PG_URI = 'postgres://zsobeakn:1pfj5_RgFQHQ-tOYU0K97A2pj9urfqsO@kashin.db.elephantsql.com/zsobeakn';
+const PG_URI = 'postgres://mwwpjhik:CvPP5d2xi8ON5DV_het_-kFt-a4YK3Pd@kashin.db.elephantsql.com/mwwpjhik';
+// password: CvPP5d2xi8ON5DV_het_-kFt-a4YK3Pd
+// API key: 7a4185aa-2d5c-41ca-9069-76eec2553383
 // create a new pool to connect our server to our database
 const pool = new Pool({
   connectionString: PG_URI,

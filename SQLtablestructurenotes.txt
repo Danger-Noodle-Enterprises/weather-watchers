@@ -4,7 +4,6 @@ CREATE DATABASE weatherapp
 
 \l 
 
-
 CREATE TABLE users(
    username_id INT GENERATED ALWAYS AS IDENTITY,
    username VARCHAR(20) NOT NULL UNIQUE,
@@ -17,6 +16,15 @@ CREATE TABLE users(
    hash VARCHAR(75),
    cookie VARCHAR(30),
    PRIMARY KEY(username_id)
+);
+
+CREATE TABLE recs(
+   rec_id INT GENERATED ALWAYS AS IDENTITY,
+   user_id INT NOT NULL,
+   vairable VARCHAR(25) NOT NULL, 
+   conditional VARCHAR(25) NOT NULL,
+   value FLOAT(25) NOT NULL, 
+   alert VARCHAR(280) NOT NULL
 );
 
 CREATE TABLE favorites(
