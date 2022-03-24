@@ -105,3 +105,31 @@ const Dashboard = (props) => {
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+/**
+
+// RULES table
+// _id, user_id, variable, condition, value, alert
+
+const dictionary = {
+  'wind speed': state.main.currentWindSpeed,
+  'other varname': what it actually is here in the front end,
+  ...
+}
+
+for (let i=0; i < data.length; i++) {
+  const currentRule = data[i];
+
+  if (currentRule.condition === 'greater than') {
+    if (dictionary[currentRule.variable] > currentRule.value) alertsList.push(<Card message=currentRule.alert />);
+  }
+  
+  if (currentRule.condition === 'less than') {
+    if (dictionary[currentRule.variable] < currentRule.value) alertsList.push(<p> message=currentRule.alert </p>);
+  }
+  
+  if (currentRule.condition === 'equal to') {
+    if (dictionary[currentRule.variable] === currentRule.value) alertsList.push(<Card message=currentRule.alert />);
+  }
+
+*/

@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const userController = require('../controller/controller.js');
+const userController = require('../controllers/userController.js');
+const cookieController = require('../controllers/cookieController.js');
 // create a new router instance
 const userRouter = Router();
 
@@ -16,9 +17,14 @@ userRouter.post('/signup', userController.createUser, (req, res) => {
   res.status(200).json(res.locals.newUser);
 });
 
+userRouter.get('/login', cookieController.checkCookie, (req, res) => {
+  const returnObj = res.locals.foundUser;
+  returnObj.cookieExists = res.locals.cookieStatus;
+  res.status(200).json(returnObj);
+});
 
 // verify user utilizing login - POST
-userRouter.post('/login', userController.verifyUser, (req, res) => {
+userRouter.post('/login', userController.verifyUser, cookieController.setCookie, (req, res) => {
   // successful - send back a status of 200 and the user data from the user table
   console.log('logging in')
   res.status(200).json(res.locals.foundUser);

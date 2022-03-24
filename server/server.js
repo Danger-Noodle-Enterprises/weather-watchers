@@ -2,12 +2,14 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 // import in bodyParser and cookieParser
 // const bodyParser = require('body-parser');
 // const cookieParser = require('cookie-parser');
 // require in the route handlers
 //
-const userRouter = require('./routes/routes');
+const userRouter = require('./routers/userRouter');
 // declare a variable that specifies which port we are listening on
 const PORT = 3000;
 // create an application for routing HTTP requests, configuring middleware
@@ -16,7 +18,10 @@ const app = express();
 // handle parsing incoming data
 app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
 app.use(express.json());
-app.use(express.urlencoded( { extended: true }));
+app.use(express.urlencoded( { extended: true } ));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded( { extended: true } ));
+
 
 // handle requests for static files -> specify the root directory to serve static assets
 // utilize an absolute path
