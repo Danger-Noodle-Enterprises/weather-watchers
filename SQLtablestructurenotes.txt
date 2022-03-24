@@ -4,6 +4,10 @@ CREATE DATABASE weatherapp
 
 \l 
 
+DROP TABLE favorites;
+DROP TABLE recs;
+DROP TABLE users CASCADE;
+
 CREATE TABLE users(
    username_id INT GENERATED ALWAYS AS IDENTITY,
    username VARCHAR(20) NOT NULL UNIQUE,
@@ -14,7 +18,7 @@ CREATE TABLE users(
    city VARCHAR(30), 
    state VARCHAR(30),
    hash VARCHAR(75),
-   cookie VARCHAR(30),
+   cookie VARCHAR(75),
    PRIMARY KEY(username_id)
 );
 
@@ -22,7 +26,7 @@ CREATE TABLE recs(
    rec_id INT GENERATED ALWAYS AS IDENTITY,
    user_id INT NOT NULL,
    vairable VARCHAR(25) NOT NULL, 
-   conditional VARCHAR(25) NOT NULL,
+   condition VARCHAR(25) NOT NULL,
    value FLOAT(25) NOT NULL, 
    alert VARCHAR(280) NOT NULL
 );
