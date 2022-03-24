@@ -164,7 +164,7 @@ userController.verifyUser = async (req, res, next) => {
     WHERE username = $1;
     `;
     const params = [username];
-    const result = db.query(queryString, params); // maybe await
+    const result = await db.query(queryString, params); // maybe await
     // console.log('Result: ', result);
     // compare the hashed password stored in the database and our plainTextPassword
     // if the plaintext password and hashedPassword do not match, throw a new syntax error

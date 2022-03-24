@@ -41,7 +41,7 @@ cookieController.setCookie = async (req, res, next) => {
     const queryString = `UPDATE users SET cookie = $1 WHERE username_id = $2 RETURNING *;`;
     const encryptedToken = await bcrypt.hash(token, saltRounds);
     const params = [encryptedToken, res.locals.foundUser.username_id];
-    const result = db.query(queryString, params); // maybe await
+    const result = await db.query(queryString, params); // maybe await
     console.log(result);
     res.append('Set-Cookie', 'board_user=' + token + ';');
     next();
@@ -73,8 +73,13 @@ cookieController.checkCookie = async (req, res, next) => {
   WHERE cookie = $1;
   `;
   const param = [cookie];
-  const result = db.query(queryString, param) // maybe await
-  const match = await bcrypt.compare(cookie, result.rows[0].cookie); 
+  const result = await db.query(queryString, param); // maybe await
+  // console.log(result); 
+  if (result.rowCount === 0) {
+    match = false;    
+  } else {
+    const match = await bcrypt.compare(cookie, result.rows[0].cookie); 
+  }
 
   if (!match) {
     // no cookie: needs to log in

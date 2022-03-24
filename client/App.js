@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 // else render the login page
 
 
-export default function App() {
+export default async function App() {
 
   const port = 3000;
   const url = `http://localhost:${port}/user/login`;
@@ -38,8 +38,8 @@ export default function App() {
       else navigate('/login', { replace: true });
     });
   }
-  // await checkCookie();
-  checkCookie();
+  await checkCookie();
+  // checkCookie();
   
 
   return (
