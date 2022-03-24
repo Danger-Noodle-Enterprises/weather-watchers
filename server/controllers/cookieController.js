@@ -18,7 +18,7 @@ cookieController.setCookie = async (req, res, next) => {
   // let cookie = req.cookies['app_user']; 
   // res.locals.cookieSet = false; 
   // if (!cookie) {
-  console.log('seting a cookie'); 
+  console.log('cookieController.js: seting a cookie'); 
 
   await crypto.randomBytes(15, async (err, buff) => {
     // use .toString with encoding 'utf8'
@@ -33,8 +33,8 @@ cookieController.setCookie = async (req, res, next) => {
     }
 
     const token = buff.toString('hex');
-    console.log('token: ', token);
-    console.log('token length: ', token.length);
+    console.log('cookieController.js: token: ', token);
+    console.log('cookieController.js: token length: ', token.length);
     res.locals.cookieSet = true;
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080'); // CORS
     res.cookie('board_user', token, {maxAge: 300000, httpOnly: true, secure: true }); // Cookie: board_user = 001203012038sdfsd
@@ -42,7 +42,7 @@ cookieController.setCookie = async (req, res, next) => {
     // const encryptedToken = await bcrypt.hash(token, saltRounds);
     const params = [token, res.locals.foundUser.username_id];
     const result = await db.query(queryString, params); // maybe await
-    console.log('sql query result:', result);
+    // console.log('cookieController.js: sql query result:', result);
     res.append('Set-Cookie', 'board_user=' + token + ';');
     next();
   });
@@ -66,7 +66,7 @@ cookieController.checkCookie = async (req, res, next) => {
   // check if client sent a cookie
   const cookie = req.cookies['board_user'];
   // console.log('req: ', req);
-  console.log('req.cookies: ', req.cookies);
+  console.log('cookieController.js: req.cookies: ', req.cookies);
   console.log('cookieController.js: cookie: ', cookie);
   const queryString = `
     SELECT 
@@ -76,7 +76,7 @@ cookieController.checkCookie = async (req, res, next) => {
   `;
   const param = [cookie];
   const result = await db.query(queryString, param); // maybe await
-  console.log(result); 
+  // console.log('cookieController.js: SQL query result: ', result); 
   let match;
   if (result.rowCount === 0) {
     match = false;    
