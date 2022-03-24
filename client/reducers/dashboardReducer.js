@@ -10,7 +10,7 @@ const initialState = {
     currentAQI: '', 
     currentWindSpeed: '',
     currentWeather: '', // ic 
-    reminders: [{id: 1, type: 'temperature', condition: 'greater', value: 80, message: 'hot'}, {id: 2, type: 'temperature', condition: 'less', value: 79, message: 'cold'}] // arry of reminder objs
+    reminders: [{rec_id: 1, variable: 'temperature', condition: 'greater than', value: 80, message: 'hot'}, {rec_id: 2, variable: 'temperature', condition: 'less than', value: 79, message: 'cold'}] // arry of reminder objs
     //favorites: []
 };
 
@@ -106,11 +106,11 @@ const dashboardReducer = (state = initialState, action) => {
           }
         }
 
-        case types.UPDATE_REMINDER: {
-          const updateReminder = action.payload;
+        case types.UPDATE_REMINDERS: {
+          const updateReminders = action.payload;
           return {
             ...state,
-            reminders: updateReminder
+            reminders: updateReminders
           }
         }
         // case types.ADD_FAVORITE: {

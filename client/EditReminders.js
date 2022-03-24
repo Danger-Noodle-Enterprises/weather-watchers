@@ -10,8 +10,6 @@ import EditCards from './components/EditCards.jsx';
 //make onCLick functions and prop drill down to buttons
 
 const mapStateToProps = state => {
-  //insert user id from state
-  //insert reminders from state
   return {
     userId: state.main.userId,
     reminders: [...state.main.reminders]
@@ -22,30 +20,48 @@ const mapDispatchToProps = dispatch => ({
   dispatchDeleteReminder: (reminderId) => {
     dispatch(actions.deleteReminder(reminderId));
   },
-  dispatchAddReminder: ({}) => {
-    dispatch(actions.addReminder({}));
+  dispatchAddReminder: (userData) => {
+    dispatch(actions.addReminder(userData));
   },
-  
-  // dispatchUpdateReminder: (reminderId) => {
-  //   dispatch(actions.updateReminder(reminderId));
-  // }
+  dispatchUpdateReminders: (userData) => {
+    dispatch(actions.updateReminders(userData));
+  },
+  dispatchEditReminder: (reminderId) => {
+    dispatch(actions.editReminder(reminderId));
+  }
 });
 
-//insert functions for opening modals
+// need to fetch and update reminders from database
+
+// useEffect(() => {
+// // fetch
+// // method: 'GET'
+
+
+
+// }
+
+
+// insert functions for opening modals
+
 
 const EditReminders = (props) => {
   console.log(`props: ${props}`)
-  // const deleteReminder = (event) => {
-  //   //update to include fetch request
-  //   props.dispatchDeleteReminder(reminderId);
-  // }
-  // const addReminder = (event) => {
-  //   props.dispatchAddReminder(reminderObj)
-  // }
+  console.log(`props.reminders: ${props.reminders}`)
+  console.log(`props.reminders[0].variable: ${props.reminders[0].variable}`)
+
   const cardsArr = [];
   for (let i = 0; i < props.reminders.length; i += 1) {
     cardsArr.push(
-    <EditCards deleteReminder={dispatchDeleteReminder} message={props.reminders[i].message}/>
+    <EditCards 
+      key={i}
+      deleteReminder={props.dispatchDeleteReminder} 
+      updateReminder={props.dispatchUpdateReminder}
+      rec_id={props.reminders[i].rec_id}
+      variable={props.reminders[i].variable}
+      condition={props.reminders[i].condition}
+      value={props.reminders[i].value}
+      message={props.reminders[i].message}/>
   )}
   return (
     <div>
@@ -62,5 +78,4 @@ const EditReminders = (props) => {
   )
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(EditReminders);
-export default EditReminders;
+export default connect(mapStateToProps, mapDispatchToProps)(EditReminders);

@@ -1,10 +1,5 @@
 import React from 'react';
 // import '../styles/CurrentWeather.css';
-import { Link, Navigate } from 'react-router-dom';
-import { connect } from 'react-redux';
-import * as actions from '../actions/actions'
-
-//invoke the drilled functions on button clicks
 
 const EditCards = props => {
 
@@ -12,11 +7,21 @@ const EditCards = props => {
   <div>
     <div className='edit-card'>
       <ul className='card-details'>
-        <li className='card-details'>Details: </li>
-        {/* {props.reminderText} */}
+        <li className='card-details'>When {props.variable} </li>
+        <li className='card-details'>is {props.condition} </li>
+        <li className='card-details'>{props.value} </li>
+        <li className='card-details'>{props.message} </li>
       </ul>
-      <button className='edit-button'>Edit</button>
-      <button className='delete-button'>Delete</button>
+      <button className='edit-button' 
+        onClick={(e) => { 
+          e.preventDefault();
+          props.updateReminder(props.rec_id);
+          }}>Edit</button>
+      <button className='delete-button'
+        onClick={(e) => { 
+          e.preventDefault();
+          props.deleteReminder(props.rec_id);
+          }}>Delete</button>
     </div>
   </div>
   )
