@@ -41,6 +41,7 @@ export default function App() { // async
 
       function checkCookie() { // async 
         fetch(url, {
+          credentials: "include",
           method: 'GET', 
         })
         .then((data) => {
@@ -48,10 +49,10 @@ export default function App() { // async
         })
         .then((data) => {
           console.log('App.js: what is the data ', data);
-          console.log('App.js: cookie status is ', data.cookieStatus);
+          console.log('App.js: cookie status is ', data.cookieExists);
           
-          // data.cookieStatus is a boolean
-          if (data.cookieStatus)  navigate('/dashboard', { replace: true}); // , { replace: true }
+          // data.cookieExists is a boolean
+          if (data.cookieExists)  navigate('/dashboard', { replace: true}); // , { replace: true }
           else  navigate('/login', { replace: true }); // , { replace: true }
         });
       }

@@ -38,11 +38,11 @@ cookieController.setCookie = async (req, res, next) => {
     res.locals.cookieSet = true;
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080'); // CORS
     res.cookie('board_user', token, {maxAge: 300000, httpOnly: true, secure: true }); // Cookie: board_user = 001203012038sdfsd
-    const queryString = `UPDATE users SET cookie = $1 WHERE username_id = $2 RETURNING *;`;
-    const encryptedToken = await bcrypt.hash(token, saltRounds);
-    const params = [encryptedToken, res.locals.foundUser.username_id];
+    const queryString = 'UPDATE users SET cookie = $1 WHERE username_id = $2 RETURNING *;';
+    // const encryptedToken = await bcrypt.hash(token, saltRounds);
+    const params = [token, res.locals.foundUser.username_id];
     const result = await db.query(queryString, params); // maybe await
-    console.log(result);
+    console.log('sql query result:', result);
     res.append('Set-Cookie', 'board_user=' + token + ';');
     next();
   });
@@ -64,7 +64,8 @@ cookieController.checkCookie = async (req, res, next) => {
   // else throw an error that the front end will handle as a redirect to the login page
   console.log('cookieController.js: checking for cookies');
   // check if client sent a cookie
-  const cookie = req.cookies.board_user;
+  const cookie = req.cookies['board_user'];
+  // console.log('req: ', req);
   console.log('req.cookies: ', req.cookies);
   console.log('cookieController.js: cookie: ', cookie);
   const queryString = `
@@ -75,24 +76,26 @@ cookieController.checkCookie = async (req, res, next) => {
   `;
   const param = [cookie];
   const result = await db.query(queryString, param); // maybe await
-  // console.log(result); 
+  console.log(result); 
+  let match;
   if (result.rowCount === 0) {
     match = false;    
-  } else {
-    const match = await bcrypt.compare(cookie, result.rows[0].cookie); 
+  } 
+  else {
+    match = true; // await bcrypt.compare(cookie, result.rows[0].cookie); 
   }
 
   if (!match) {
     // no cookie: needs to log in
     // currently: doing nothing
     console.log('cookieController.js: no cookie detected');
-    res.locals.cookieStatus = false;
+    res.locals.cookieExists = false;
   } else {
     // if cookie was already present 
     // how do we check if cookie is stale?
     console.log('cookieController.js: cookie detected');
     res.locals.foundUser = result.rows[0];
-    res.locals.cookieStatus = true;
+    res.locals.cookieExists = true;
   }
   console.log('cookieController.js: res.locals: ', res.locals);
   next();
