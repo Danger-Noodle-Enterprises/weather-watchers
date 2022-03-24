@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 const Reminders = (props) => {
 
+  // <p onClick={props.displayReminder}></p>
   //construct a dictionary where 
 
   // const dictionary = {
@@ -15,19 +16,19 @@ const Reminders = (props) => {
   // }
 
   // save returned favorite places array to state
-  fetch(`/reminders/${props.userId}`)
-  .then( response => {
-    const status = response.status;
-    return response.json();
-  })
-  .then( data => {
-    this.props.dispatchUpdateFavorites(data);
-    console.log('Reminders data: ', data);
+  // fetch(`/reminders/${props.userId}`)
+  // .then( response => {
+  //   const status = response.status;
+  //   return response.json();
+  // })
+  // .then( data => {
+  //   this.props.dispatchUpdateFavorites(data);
+  //   console.log('Reminders data: ', data);
     // save array of Reminders to state at state.favorites
     
-  });
+  // });
 
-  const reminders = [];
+  // const reminders = [];
 
 
 //invoke fetch request bring in all the reminders based on userID

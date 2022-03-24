@@ -21,16 +21,20 @@ const mapDispatchToProps = dispatch => ({
   dispatchDeleteReminder: (reminderId) => {
     dispatch(actions.deleteReminder(reminderId));
   },
-  
-  dispatchUpdateReminder: (reminderId) => {
-    dispatch(actions.updateReminder(reminderId));
+  dispatchAddReminder: ({}) => {
+    dispatch(actions.addReminder({}));
   }
+  
+  // dispatchUpdateReminder: (reminderId) => {
+  //   dispatch(actions.updateReminder(reminderId));
+  // }
 });
 
 //insert functions for opening modals
 
 const EditReminders = () => {
   const deleteReminder = (event) => {
+    //update to include fetch request
     props.dispatchDeleteReminder(reminderId);
   }
   const cardsArr = [];

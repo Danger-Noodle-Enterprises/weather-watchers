@@ -22,7 +22,7 @@ const mapStateToProps = state => {
     currentTemp: state.main.currentTemp, 
     currentAQI: state.main.currentAQI, 
     currentWindSpeed: state.main.currentWindSpeed,
-    reminders: state.main.reminders,
+    reminders: [...state.main.reminders],
     // favorites: [...state.main.favorites]
     }
 };
@@ -48,7 +48,8 @@ const mapDispatchToProps = dispatch => ({
 
 
 const Dashboard = (props) => {
-
+  //displayReminder function
+    //fetch
 
 //   const addToFavorites = () => {
 //     fetch('/server', {

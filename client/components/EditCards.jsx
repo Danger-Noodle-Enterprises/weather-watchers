@@ -21,4 +21,4 @@ const EditCards = props => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditCards);
+export default EditCards;
