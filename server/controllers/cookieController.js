@@ -62,15 +62,16 @@ cookieController.checkCookie = async (req, res, next) => {
   // only invoke next() if there is a valid cookie included in the request
   //   check if the cookie is valid by looking up the cookie value we set on the user's database entry
   // else throw an error that the front end will handle as a redirect to the login page
-  console.log('checking for cookies');
+  console.log('cookieController.js: checking for cookies');
   // check if client sent a cookie
   const cookie = req.cookies.board_user;
-  console.log(cookie);
+  console.log('req.cookies: ', req.cookies);
+  console.log('cookieController.js: cookie: ', cookie);
   const queryString = `
-  SELECT 
-  username_id, username, password, nickname, email, tos, city, state, cookie
-  FROM users
-  WHERE cookie = $1;
+    SELECT 
+    username_id, username, password, nickname, email, tos, city, state, cookie
+    FROM users
+    WHERE cookie = $1;
   `;
   const param = [cookie];
   const result = await db.query(queryString, param); // maybe await
@@ -84,16 +85,16 @@ cookieController.checkCookie = async (req, res, next) => {
   if (!match) {
     // no cookie: needs to log in
     // currently: doing nothing
-    console.log('no cookie detected');
-    res.locals.foundUser = result.rows[0];
+    console.log('cookieController.js: no cookie detected');
     res.locals.cookieStatus = false;
   } else {
     // if cookie was already present 
     // how do we check if cookie is stale?
-    console.log('cookie detected');
+    console.log('cookieController.js: cookie detected');
     res.locals.foundUser = result.rows[0];
     res.locals.cookieStatus = true;
   }
+  console.log('cookieController.js: res.locals: ', res.locals);
   next();
   // res.status(200).json({cookieExists: res.locals.cookieStatus});
 }
