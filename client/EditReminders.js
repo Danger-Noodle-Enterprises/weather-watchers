@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
   },
   dispatchAddReminder: ({}) => {
     dispatch(actions.addReminder({}));
-  }
+  },
   
   // dispatchUpdateReminder: (reminderId) => {
   //   dispatch(actions.updateReminder(reminderId));
@@ -33,19 +33,20 @@ const mapDispatchToProps = dispatch => ({
 
 //insert functions for opening modals
 
-const EditReminders = () => {
-  const deleteReminder = (event) => {
-    //update to include fetch request
-    props.dispatchDeleteReminder(reminderId);
-  }
-  const addReminder = (event) => {
-    props.dispatchAddReminder(reminderObj)
-  }
+const EditReminders = (props) => {
+  console.log(`props: ${props}`)
+  // const deleteReminder = (event) => {
+  //   //update to include fetch request
+  //   props.dispatchDeleteReminder(reminderId);
+  // }
+  // const addReminder = (event) => {
+  //   props.dispatchAddReminder(reminderObj)
+  // }
   const cardsArr = [];
-  // for (let i = 0; i < props.reminders.length; i += 1) {
-  //   cardsArr.push(
-  //   <EditCards message={props.reminders[i].message}/>
-  // )}
+  for (let i = 0; i < props.reminders.length; i += 1) {
+    cardsArr.push(
+    <EditCards deleteReminder={dispatchDeleteReminder} message={props.reminders[i].message}/>
+  )}
   return (
     <div>
       <nav>
@@ -55,7 +56,7 @@ const EditReminders = () => {
         </button>
       </Link>
     </nav>
-    {/* {cardsArr} */}
+    {cardsArr}
 
     </div>
   )

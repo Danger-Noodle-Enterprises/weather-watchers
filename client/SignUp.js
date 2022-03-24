@@ -7,7 +7,7 @@ import './styles/SignUp.css';
 export default function Test() {
   const navigate = useNavigate();
   const routeChange = () => {
-    const path = '/'; // will be changed to '/login'
+    const path = '/login';
     navigate(path);
   }
 

@@ -5,7 +5,7 @@ import * as actions from './actions/actions';
 import './styles/Dashboard.css';
 import SearchBar from './components/SearchBar';
 import CurrentWeather from './components/CurrentWeather.jsx';
-import Reminders from './components/Reminders.jsx';
+// import Reminders from './components/Reminders.jsx';
 // import RemoveFavButton from './components/RemoveFavButton.jsx';
 // import FavWeather from './components/FavWeather.jsx';
 
@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
       dispatch(actions.searchForLocation(newSearchLocation));
     }, 
 
-    AddReminder: (newReminder) => { // not used in here tho
+    dispatchAddReminder: (newReminder) => { // not used in here tho
       dispatch(actions.addReminder(newReminder));
     }
 
@@ -103,7 +103,17 @@ const Dashboard = (props) => {
 //   }
   // make api request with each favorite location -> take the results from that api response
   // drill it down to -> create instances of components displaying weather info for each fav place
-  // console.log(`reminders: ${props.reminders}`)
+  // console.log(`reminders: ${props.reminders[0].message}`)
+
+
+
+
+
+
+
+
+
+
   return (
     <div id='dashboard'>
       <nav>
@@ -124,9 +134,10 @@ const Dashboard = (props) => {
         city={props.city} 
         state={props.state} 
         country={props.country} 
-        currentTemp={props.currentTemp} 
+      currentTemp={props.currentTemp} 
         currentAQI={props.currentAQI} 
         currentWindSpeed={props.currentWindSpeed} />
+      {/* <Reminders/> */}
 
 
       {/* <button id='setFavorite' onClick={addToFavorites}>Add To Favorites</button> */}

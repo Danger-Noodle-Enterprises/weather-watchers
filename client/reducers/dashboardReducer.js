@@ -10,7 +10,7 @@ const initialState = {
     currentAQI: '', 
     currentWindSpeed: '',
     currentWeather: '', // ic 
-    reminders: [], // arry of reminder objs
+    reminders: [{id: 1, type: 'temperature', condition: 'greater', value: 80, message: 'hot'}, {id: 2, type: 'temperature', condition: 'less', value: 79, message: 'cold'}] // arry of reminder objs
     //favorites: []
 };
 

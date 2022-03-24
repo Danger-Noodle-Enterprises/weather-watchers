@@ -45,6 +45,8 @@ const Reminders = ({currentTemp,
                         }
                       }
                     }
+
+                    return {reminderList};
                   }
                 
 
