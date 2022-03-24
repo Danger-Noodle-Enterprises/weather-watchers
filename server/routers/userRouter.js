@@ -20,9 +20,12 @@ userRouter.post('/signup', userController.createUser, (req, res) => {
 
 userRouter.get('/login', cookieController.checkCookie, (req, res) => {
   console.log('userRouter.js: inside final middleware chain of GET /login endpoint');
-  const returnObj = {};
+  let returnObj = {};
+  // console.log('userRouter.js: initialized returnObj: ', returnObj);
   if (res.locals.foundUser) returnObj = res.locals.foundUser;
-  returnObj.cookieExists = res.locals.cookieStatus;
+  // console.log('userRouter.js: after if res.locals.founduser, returnObj: ', returnObj);
+  returnObj.cookieExists = res.locals.cookieExists;
+  console.log('userRouter.js: after setting cookieExists on returnObj: ', returnObj);
   return res.status(200).json(returnObj);
 });
 
