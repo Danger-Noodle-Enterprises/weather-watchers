@@ -47,8 +47,8 @@ export default function App() { // async
           return data.json()
         })
         .then((data) => {
-          console.log('what is the data ', data);
-          console.log('cookie status is ', data.cookieStatus);
+          console.log('App.js: what is the data ', data);
+          console.log('App.js: cookie status is ', data.cookieStatus);
           
           // data.cookieStatus is a boolean
           if (data.cookieStatus)  navigate('/dashboard', { replace: true}); // , { replace: true }
@@ -61,7 +61,7 @@ export default function App() { // async
       console.log('App.js: sent checkcookie request');
       cookieChecked = true;
       console.log('App.js: cookieChecked: ', cookieChecked);
-    }, [])
+    }, []);
 
   }
 
