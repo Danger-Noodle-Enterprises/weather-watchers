@@ -23,7 +23,7 @@ export const updateReminder = userData => ({
 
 export const deleteReminder = userData => ({
   type: types.DELETE_REMINDER, 
-  payload: reminderData
+  payload: reminderId
 })
 
 
