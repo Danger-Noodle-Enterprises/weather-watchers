@@ -12,7 +12,7 @@ const EditCards = props => {
   <div>
     <div className='edit-card'>
       <ul className='card-details'>
-        <li className='card-details'>Details: </li>
+        <li className='card-details'>Details: {props.message}</li>
         {/* {props.reminderText} */}
       </ul>
       <button className='edit-button'>Edit</button>

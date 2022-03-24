@@ -14,7 +14,14 @@ const mapStateToProps = state => {
   //insert reminders from state
   return {
     userId: state.main.userId,
-    reminders: [...state.main.reminders]
+    nickname: state.main.nickname,
+    city: state.main.city, 
+    stateName: state.main.stateName, 
+    country: state.main.country,
+    currentTemp: state.main.currentTemp, 
+    currentAQI: state.main.currentAQI, 
+    currentWindSpeed: state.main.currentWindSpeed,
+    reminders: [...state.main.reminders],
   }
 }
 
@@ -34,7 +41,6 @@ const mapDispatchToProps = dispatch => ({
 //insert functions for opening modals
 
 const EditReminders = (props) => {
-  console.log(`props: ${props}`)
   // const deleteReminder = (event) => {
   //   //update to include fetch request
   //   props.dispatchDeleteReminder(reminderId);
@@ -43,10 +49,12 @@ const EditReminders = (props) => {
   //   props.dispatchAddReminder(reminderObj)
   // }
   const cardsArr = [];
-  for (let i = 0; i < props.reminders.length; i += 1) {
-    cardsArr.push(
-    <EditCards deleteReminder={dispatchDeleteReminder} message={props.reminders[i].message}/>
-  )}
+  // for (let i = 0; i < props.reminders.length; i += 1) {
+  //   cardsArr.push(
+  //   <EditCards deleteReminder={dispatchDeleteReminder} message={props.reminders[i].message}/>
+  // )}
+  console.log(`props: ${props}`)
+  console.log(`props reminders: ${props.reminders}`)
   return (
     <div>
       <nav>
@@ -56,7 +64,7 @@ const EditReminders = (props) => {
         </button>
       </Link>
     </nav>
-    {cardsArr}
+    {/* {cardsArr} */}
 
     </div>
   )
