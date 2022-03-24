@@ -116,8 +116,8 @@ class LoginBox extends Component {
   // }
   
   render() {
-    console.log('loggedIn: ', this.state.loggedIn)
-    return this.state.loggedIn ? <Navigate to="/dashboard" /> : (
+    console.log('loggedIn: ', this.state.loggedIn);
+    return this.state.loggedIn ? <Navigate to="/dashboard" /> : ( // <Navigate to="/login"/>;
       <div id="LoginBox">
         <h1 id='loginHeader'>Breathe Better Air™</h1>
         <form id="loginForm" onSubmit={this.onSubmit}>

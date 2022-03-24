@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM, { render } from 'react-dom';
 import { connect } from 'react-redux';
 import {Link, Navigate} from 'react-router-dom';
+import * as actions from './actions/actions';
 import EditCards from './components/EditCards.jsx';
 // import '../styles/CurrentWeather.css';
 
@@ -37,21 +38,25 @@ const EditReminders = () => {
     //update to include fetch request
     props.dispatchDeleteReminder(reminderId);
   }
+  const addReminder = (event) => {
+    props.dispatchAddReminder(reminderObj)
+  }
   const cardsArr = [];
-  for (let i = 0; i < props.reminders.length; i += 1) {
-    cardsArr.push(
-    <EditCards message={props.reminders[i].message}/>
-  )}
+  // for (let i = 0; i < props.reminders.length; i += 1) {
+  //   cardsArr.push(
+  //   <EditCards message={props.reminders[i].message}/>
+  // )}
   return (
     <div>
       <nav>
-      <Link to={'/dashbord'}>
+      <Link to={'/dashboard'}>
         <button>
           Back to dashboard
         </button>
       </Link>
     </nav>
-    {cardsArr}
+    {/* {cardsArr} */}
+
     </div>
   )
 }

@@ -103,6 +103,7 @@ const Dashboard = (props) => {
 //   }
   // make api request with each favorite location -> take the results from that api response
   // drill it down to -> create instances of components displaying weather info for each fav place
+  // console.log(`reminders: ${props.reminders}`)
   return (
     <div id='dashboard'>
       <nav>
@@ -114,9 +115,9 @@ const Dashboard = (props) => {
       </nav>
       <h1>Welcome, {props.nickname}!</h1>
       <SearchBar dispatchSearchLocation={props.dispatchSearchLocation}/>
-      <Reminders 
+      {/* <Reminders 
         userId={props.userId} 
-        reminders={props.reminders} />
+        reminders={props.reminders} /> */}
       <p>Your Forecast:</p>
       <CurrentWeather 
         username={props.username} 
