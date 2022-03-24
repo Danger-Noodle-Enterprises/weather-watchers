@@ -6,6 +6,7 @@ const userRouter = Router();
 
 
 
+
 userRouter.get('/signup', (req, res) => {
   res.status(200).send('you did it!');
 })
@@ -18,16 +19,19 @@ userRouter.post('/signup', userController.createUser, (req, res) => {
 });
 
 userRouter.get('/login', cookieController.checkCookie, (req, res) => {
-  const returnObj = res.locals.foundUser;
+  console.log('userRouter.js: inside final middleware chain of GET /login endpoint');
+  const returnObj = {};
+  if (res.locals.foundUser) returnObj = res.locals.foundUser;
   returnObj.cookieExists = res.locals.cookieStatus;
-  res.status(200).json(returnObj);
+  return res.status(200).json(returnObj);
 });
 
 // verify user utilizing login - POST
 userRouter.post('/login', userController.verifyUser, cookieController.setCookie, (req, res) => {
+  console.log('userRouter.js: inside final middleware chain of POST /login endpoint');
   // successful - send back a status of 200 and the user data from the user table
   console.log('logging in')
-  res.status(200).json(res.locals.foundUser);
+  return res.status(200).json(res.locals.foundUser);
 });
 
 //verify user for during log in based on cookies - POST

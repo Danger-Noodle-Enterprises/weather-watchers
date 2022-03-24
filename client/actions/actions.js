@@ -28,27 +28,27 @@ export const deleteReminder = userData => ({
 
 
 
-// export const addFavorite = newLocation => ({
-//   type: types.ADD_FAVORITE,
-//   payload: newLocation,
-// });
+export const addFavorite = newLocation => ({
+  type: types.ADD_FAVORITE,
+  payload: newLocation,
+});
   
-// export const addFriend = friendId => ({
-//   type: types.ADD_FRIEND,
-//   payload: friendId,
-// });
+export const addFriend = friendId => ({
+  type: types.ADD_FRIEND,
+  payload: friendId,
+});
 
-// export const deleteFavorite = locationId => ({
-//   type: types.DELETE_FAVORITE, 
-//   payload: locationId
-// })
+export const deleteFavorite = locationId => ({
+  type: types.DELETE_FAVORITE, 
+  payload: locationId
+})
 
-// export const updateFavorites = locationsArray => ({
-//   type: types.UPDATE_FAVORITES,
-//   payload: locationsArray
-// })
+export const updateFavorites = locationsArray => ({
+  type: types.UPDATE_FAVORITES,
+  payload: locationsArray
+})
 
-// export const apiAppendFavs = apiData => ({
-//   type: types.API_FAVORITES,
-//   payload: apiData
-// })
+export const apiAppendFavs = apiData => ({
+  type: types.API_FAVORITES,
+  payload: apiData
+})

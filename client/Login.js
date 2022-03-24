@@ -7,6 +7,11 @@ import SearchBar from './components/SearchBar';
 // import { Link } from 'react-router-dom';
 // <Link to='/signup'>here</Link>
 // <span>Don't have an account? Sign up <a href='/login'>here</a></span>
+/**
+console.log('loggedIn: ', this.state.loggedIn)
+this.state.loggedIn ? <Navigate to="/dashboard" /> : <Navigate to="/login"/>;
+*/
+
 const Login = () => {
   return (
     <div id='loginPage'>
