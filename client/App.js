@@ -5,6 +5,8 @@ import SignUp from './SignUp.js'
 import Dashboard from './Dashboard.js';
 import EditReminders from './EditReminders.js';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './actions/actions';
 // import {Navigate} from 'react-router-dom';
 // import { Redirect } from 'react-router-dom'; 
 
@@ -24,14 +26,42 @@ import { useNavigate } from 'react-router-dom';
 /**
   console.log('loggedIn: ', this.state.loggedIn)
   this.state.loggedIn ? <Navigate to="/dashboard" /> : <Navigate to="/login"/>;
+  
+  export default connect(null, mapDispatchToProps)(LoginBox);
+
 */
 
+// const mapStateToProps = state => {
+//   return {
+//     userId: state.main.userId,
+//     reminders: [...state.main.reminders]
+//   }
+// }
 
-export default function App() { // async 
+const mapDispatchToProps = dispatch => ({
+  // create functions that will dispatch action creators
+  dispatchSearchLocation: (newSearchLocation) => {
+    dispatch(actions.searchForLocation(newSearchLocation));
+  },
+
+  dispatchUsernameStorage: (username) => {
+    dispatch(actions.storeUserData(username));
+  }, 
+  
+//   dispatchAddFavorite: (location) => {
+//     dispatch(actions.addFavorite(location));
+//   },
+
+//   dispatchUpdateFavorites: (locationsArray) => {
+//     dispatch(actions.updateFavorites(locationsArray));
+//   }
+});
+
+const App = function (props) { // async 
   let cookieChecked = false;
-  console.log('App.js: outside if cookieChecked block');
+  // console.log('App.js: outside if cookieChecked block');
   if (!cookieChecked) {
-    console.log('App.js: inside if !cookieChecked block');
+    // console.log('App.js: inside if !cookieChecked block');
     const port = 3000;
     const url = `http://localhost:${port}/user/login`;
     
@@ -49,25 +79,37 @@ export default function App() { // async
           return data.json()
         })
         .then((data) => {
-          console.log('App.js: what is the data ', data);
-          console.log('App.js: cookie status is ', data.cookieExists);
+          // console.log('App.js: what is the data ', data);
+          // console.log('App.js: cookie status is ', data.cookieExists);
           
           // data.cookieExists is a boolean
-          if (data.cookieExists)  navigate('/dashboard', { replace: true}); // , { replace: true }
+          if (data.cookieExists) {
+            props.dispatchUsernameStorage({userId: data.username_id, nickname: data.nickname});
+            // query the IQAir API and dispatch the returned data to the state/store
+            fetch(`http://api.airvisual.com/v2/nearest_city?key=${process.env.API_KEY}`)
+            .then(data => data.json())
+            .then((data) => {
+              console.log('data: ', data);
+              // searchForLocation(data)
+              // save the favorites list of this user returned from the backend on a successful login
+              props.dispatchSearchLocation(data);
+            })
+            .catch(error => console.log('error in api get request: ', error));
+            navigate('/dashboard', { replace: true});
+          } // , { replace: true }
           else  navigate('/login', { replace: true }); // , { replace: true }
         });
       }
       
       checkCookie();
-      // await checkCookie();
-      console.log('App.js: sent checkcookie request');
+      // console.log('App.js: sent checkcookie request');
       cookieChecked = true;
-      console.log('App.js: cookieChecked: ', cookieChecked);
+      // console.log('App.js: cookieChecked: ', cookieChecked);
     }, []);
 
   }
 
-  console.log('App.js: after if !cookieChecked block');
+  // console.log('App.js: after if !cookieChecked block');
 
   return (
     <div>
@@ -82,3 +124,5 @@ export default function App() { // async
     </div>
   )
 }
+
+export default connect(null, mapDispatchToProps)(App);
