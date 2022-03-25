@@ -60,39 +60,47 @@ const Dashboard = (props) => {
   
   //declare empty array to store each reminder post processing
   const reminderList = [];
-  if (props.reminders[0]) console.log('type of reminder value: ', typeof props.reminders[0].value);
-  console.log('dictionary: ', dictionary);
+
+  console.log('props.reminders: ', props.reminders);
+  // if (props.reminders[0]) console.log('type of reminder value: ', typeof props.reminders[0].value);
+  // console.log('dictionary: ', dictionary);
   //loop through favorites and evaluate the variables and conditions based on current environmental conditions
   //sample input
   //[{1,3, temperature, greater, 80, hot}]
   //[{id, type, condition, value, message}]
   for (let i = 0; i < props.reminders.length; i++){
     const currentRule = props.reminders[i];
-    
+    console.log('current reminder: ', currentRule);
     //conditional statement to handle greater than cases
     if(currentRule.condition === 'greater than'){
-      if(dictionary[currentRule.type] > currentRule.value) {
-        reminderList.push(<p>message={currentRule.message}</p>);
+      console.log('CONDITIONAL TRIGGERED: GREATER THAN');
+      if(dictionary[currentRule.variable] > currentRule.value) {
+        console.log('INSIDE GREATER THAN: CONDITIONAL PASSED');
+        reminderList.push(<p key={`message ${i}`}>Reminder triggered: {currentRule.message}</p>);
       }
     }
     
     //conditional statement to handle less than cases
       else if(currentRule.condition === 'less than'){
-      if(dictionary[currentRule.type] < currentRule.value) {
-        reminderList.push(<p>message={currentRule.message}</p>);
+        console.log('CONDITIONAL TRIGGERED: LESS THAN');
+      if(dictionary[currentRule.variable] < currentRule.value) {
+        console.log('INSIDE LESS THAN: CONDITIONAL PASSED');
+        reminderList.push(<p key={`message ${i}`}>Reminder triggered: {currentRule.message}</p>);
       }
     }
 
     //conditional statement to handle equal to cases
     else if(currentRule.condition === 'equal to'){
-      if(dictionary[currentRule.type] === currentRule.value) {
-        reminderList.push(<p>message={currentRule.message}</p>);
+      console.log('CONDITIONAL TRIGGERED: EQUAL TO');
+      if(dictionary[currentRule.variable] === currentRule.value) {
+        console.log('INSIDE EQUAL TO: CONDITIONAL PASSED');
+        reminderList.push(<p key={`message ${i}`}>Reminder triggered: {currentRule.message}</p>);
       }
     }
     // return reminderList;
   }
 
-
+  console.log('reminderList: ', reminderList);
 
   const onLogout = () => {
     // ideally also delete the cookies but idk how to that yet
