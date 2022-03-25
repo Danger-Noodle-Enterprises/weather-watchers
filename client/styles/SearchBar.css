@@ -5,6 +5,12 @@
   
 }
 
+.currentWeather {
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 4px; 
+}
+
 .searchBtn {
   background-color: #808080;
   color: #4189F2;
@@ -19,3 +25,4 @@
   transition-duration: .3s;
   margin-top: 10px;
 }
+

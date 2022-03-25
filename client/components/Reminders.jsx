@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/Dashboard.css';
 
 
 //object destructuring, access the props drilled from parent, dashboard
@@ -27,21 +28,21 @@ const Reminders = ({currentTemp,
                       //conditional statement to handle greater than cases
                       if(currentRule.condition === 'greater'){
                         if(dictionary[currentRule.type] > currentRule.value) {
-                          reminderList.push(<p>message={currentRule.message}</p>);
+                          reminderList.push(<p id="edit-message">message={currentRule.message}</p>);
                         }
                       }
                       
                       //conditional statement to handle less than cases
                       if(currentRule.condition === 'less'){
                         if(dictionary[currentRule.type] < currentRule.value) {
-                          reminderList.push(<p>message=currentRule.message</p>);
+                          reminderList.push(<p id="edit-message">message=currentRule.message</p>);
                         }
                       }
 
                       //conditional statement to handle equal to cases
                       if(currentRule.condition === 'equal'){
                         if(dictionary[currentRule.type] === currentRule.value) {
-                          reminderList.push(<p>message=currentRule.message</p>);
+                          reminderList.push(<p id="edit-message">message=currentRule.message</p>);
                         }
                       }
                     }

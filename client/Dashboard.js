@@ -113,14 +113,14 @@ const Dashboard = (props) => {
   return (
     <div id='dashboard'>
       <nav>
-      <button onClick = {onLogout}>logout</button>
+      <button className="nav-buttons" onClick = {onLogout}>logout</button>
       <Link to={'/edit'}>
-        <button>
+        <button className="nav-buttons">
           Edit your reminders
         </button>
       </Link>
       </nav>
-      <h1>Welcome, {props.nickname}!</h1>
+      <h1 className = 'welcomeHeader'>Welcome, {props.nickname}!</h1>
       <SearchBar dispatchSearchLocation={props.dispatchSearchLocation}/>
       {/* <Reminders 
         userId={props.userId} 

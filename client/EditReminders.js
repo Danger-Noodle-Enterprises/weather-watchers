@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from './actions/actions';
 import EditCards from './components/EditCards.jsx';
-// import '../styles/CurrentWeather.css';
+import './styles/Dashboard.css';
 
 
 //make onCLick functions and prop drill down to buttons
@@ -121,7 +121,7 @@ const EditReminders = (props) => {
       />
   )}
   return (
-    <div>
+    <div className="edit-reminders">
       <nav>
       <Link to={'/dashboard'}>
         <button>

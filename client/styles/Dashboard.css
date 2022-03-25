@@ -1,11 +1,40 @@
 body {
-  background: rgb(150, 192, 247);
+
+  background: rgb(9, 52, 109);
+  color: white;
+
+
 }
 
 #dashboard {
-  height: 30vh;
+  height: 100%;
+  /* background: linear-gradient(180deg, rgb(9, 52, 109), rgb(24, 30, 43)); */
+  /* margin-bottom: 100%; */
 }
 
+.welcomeHeader {
+  margin-top: 70px; 
+  margin-bottom: 60px;
+}
+
+.nav-buttons {
+  border-radius: 5px;
+  padding : 3px; 
+  color:rgb(9, 52, 109); 
+  margin: 10px 10px;
+
+}
+
+.edit-reminders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+#edit-message {
+  margin-bottom: 30px;
+}
 /* #setFavorite {
   border-radius: 12px;
   border: none;
