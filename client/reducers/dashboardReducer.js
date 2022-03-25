@@ -99,11 +99,12 @@ const dashboardReducer = (state = initialState, action) => {
         }
 
         case types.DELETE_REMINDER: {
-          const newReminders = state.reminders.filter((reminder) => {reminder.id !== action.payload})
+          const newReminders = state.reminders.filter((reminder) => {reminder.rec_id !== action.payload})
           const newState = {
             ...state,
             reminders: newReminders
           }
+          return newState;
         }
 
         case types.UPDATE_REMINDERS: {
@@ -113,6 +114,29 @@ const dashboardReducer = (state = initialState, action) => {
             reminders: updateReminders
           }
         }
+
+        case types.EDIT_REMINDER: {
+          const updatedReminder = action.payload;
+          // state.reminders // <- this is an array of reminder objects
+          // from that array find the matching rec_id and replace that state object with new object from payload
+          let indexToBeUpdated; 
+
+          for ( let i = 0; i < state.reminders.length; i++) {
+            if(state.reminders[i].rec_id === updatedReminder.rec_id) indexOfReminderToBeUpdated = i
+          }
+
+          const updatedList = state.reminders;
+
+          if (indexToBeUpdated) {
+            updatedList[indexToBeUpdated] = updatedReminder;
+          }
+
+          return {
+            ...state,
+            reminders: updatedList
+          }
+        }
+
         // case types.ADD_FAVORITE: {
         //     const favoriteId = action.payload.data.favorite_id;
         //     const favoriteCity = action.payload.data.city;
