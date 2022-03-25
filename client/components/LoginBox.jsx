@@ -15,13 +15,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.storeUserData(username));
   }, 
   
-  // dispatchAddFavorite: (location) => {
-  //   dispatch(actions.addFavorite(location));
-  // },
+//   dispatchAddFavorite: (location) => {
+//     dispatch(actions.addFavorite(location));
+//   },
 
-  // dispatchUpdateFavorites: (locationsArray) => {
-  //   dispatch(actions.updateFavorites(locationsArray));
-  // }
+//   dispatchUpdateFavorites: (locationsArray) => {
+//     dispatch(actions.updateFavorites(locationsArray));
+//   }
 });
 
 class LoginBox extends Component {
@@ -59,6 +59,11 @@ class LoginBox extends Component {
         fetchStatus = response.status;
         return response.json();
       })
+
+
+
+
+
       .then((data) => {
         console.log('data: ', data);
         if (fetchStatus === 200) {
