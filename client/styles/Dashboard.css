@@ -1,10 +1,12 @@
+body {
+  /* background: linear-gradient(180deg, rgb(9, 52, 109), rgb(24, 30, 43)); */
+}
+
 #dashboard {
   height: 30vh;
 }
 
-#setFavorite {
-  background-color: #808080;
-  color: #4189F2;
+/* #setFavorite {
   border-radius: 12px;
   border: none;
   line-height: 2rem;
@@ -15,4 +17,4 @@
   background: white;
   transition-duration: .3s;
   margin-top: 10px;
-}
+} */

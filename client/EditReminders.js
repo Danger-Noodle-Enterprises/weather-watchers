@@ -12,7 +12,14 @@ import EditCards from './components/EditCards.jsx';
 const mapStateToProps = state => {
   return {
     userId: state.main.userId,
-    reminders: [...state.main.reminders]
+    nickname: state.main.nickname,
+    city: state.main.city, 
+    stateName: state.main.stateName, 
+    country: state.main.country,
+    currentTemp: state.main.currentTemp, 
+    currentAQI: state.main.currentAQI, 
+    currentWindSpeed: state.main.currentWindSpeed,
+    reminders: [...state.main.reminders],
   }
 }
 
