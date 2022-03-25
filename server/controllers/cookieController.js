@@ -74,6 +74,7 @@ cookieController.checkCookie = async (req, res, next) => {
   `;
   const param = [cookie];
   const result = db.query(queryString, param) // maybe await
+  
   const match = await bcrypt.compare(cookie, result.rows[0].cookie); 
 
   if (!match) {

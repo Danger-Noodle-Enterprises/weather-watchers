@@ -16,7 +16,7 @@ const PORT = 3000;
 const app = express();
 
 // handle parsing incoming data
-app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
+app.use(cors({origin: 'http://localhost:8080',credentials: true,}));
 app.use(express.json());
 app.use(express.urlencoded( { extended: true } ));
 app.use(cookieParser());
