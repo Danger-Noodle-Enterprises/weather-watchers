@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Link, Navigate} from 'react-router-dom';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
 import * as actions from './actions/actions';
 import './styles/Dashboard.css';
 import SearchBar from './components/SearchBar';
@@ -105,11 +105,15 @@ const Dashboard = (props) => {
   // drill it down to -> create instances of components displaying weather info for each fav place
   // console.log(`reminders: ${props.reminders[0].message}`)
 
+  
 
-
-
-
-
+    const onLogout = () => {
+      // ideally also delete the cookies but idk how to that yet
+      // redirect the client to the /login endpoint
+      const navigate = useNavigate();
+      const path = '/login';
+      navigate(path, { replace: true });
+    }
 
 
 
@@ -117,6 +121,7 @@ const Dashboard = (props) => {
   return (
     <div id='dashboard'>
       <nav>
+      <button onClick = {onLogout}>logout</button>
       <Link to={'/edit'}>
         <button>
           Edit your reminders
@@ -141,7 +146,7 @@ const Dashboard = (props) => {
 
 
       {/* <button id='setFavorite' onClick={addToFavorites}>Add To Favorites</button> */}
-      {/* {favComponents} */}
+      {/* {reminderList} */}
 
     </div>
   )}
