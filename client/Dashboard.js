@@ -51,6 +51,122 @@ const Dashboard = (props) => {
   //displayReminder function
     //fetch
 
+  //declare dictionary to refer database string to variables
+  const dictionary = {
+    'windspeed': props.currentWindSpeed,
+    'temperature': props.currentTemp,
+    'AQI': props.currentAQI
+  }
+  
+  //declare empty array to store each reminder post processing
+  const reminderList = [];
+  if (props.reminders[0]) console.log('type of reminder value: ', typeof props.reminders[0].value);
+  console.log('dictionary: ', dictionary);
+  //loop through favorites and evaluate the variables and conditions based on current environmental conditions
+  //sample input
+  //[{1,3, temperature, greater, 80, hot}]
+  //[{id, type, condition, value, message}]
+  for (let i = 0; i < props.reminders.length; i++){
+    const currentRule = props.reminders[i];
+    
+    //conditional statement to handle greater than cases
+    if(currentRule.condition === 'greater than'){
+      if(dictionary[currentRule.type] > currentRule.value) {
+        reminderList.push(<p>message={currentRule.message}</p>);
+      }
+    }
+    
+    //conditional statement to handle less than cases
+      else if(currentRule.condition === 'less than'){
+      if(dictionary[currentRule.type] < currentRule.value) {
+        reminderList.push(<p>message={currentRule.message}</p>);
+      }
+    }
+
+    //conditional statement to handle equal to cases
+    else if(currentRule.condition === 'equal to'){
+      if(dictionary[currentRule.type] === currentRule.value) {
+        reminderList.push(<p>message={currentRule.message}</p>);
+      }
+    }
+    // return reminderList;
+  }
+
+
+
+  const onLogout = () => {
+    // ideally also delete the cookies but idk how to that yet
+    // redirect the client to the /login endpoint
+    const navigate = useNavigate();
+    const path = '/login';
+    navigate(path, { replace: true });
+  }
+
+  return (
+    <div id='dashboard'>
+      <nav>
+      <button onClick = {onLogout}>logout</button>
+      <Link to={'/edit'}>
+        <button>
+          Edit your reminders
+        </button>
+      </Link>
+      </nav>
+      <h1>Welcome, {props.nickname}!</h1>
+      <SearchBar dispatchSearchLocation={props.dispatchSearchLocation}/>
+      {/* <Reminders 
+        userId={props.userId} 
+        reminders={props.reminders} /> */}
+      <p>Your Forecast:</p>
+      <CurrentWeather 
+        username={props.username} 
+        city={props.city} 
+        state={props.state} 
+        country={props.country} 
+      currentTemp={props.currentTemp} 
+        currentAQI={props.currentAQI} 
+        currentWindSpeed={props.currentWindSpeed} />
+      {/* <Reminders/> */}
+
+
+      {/* <button id='setFavorite' onClick={addToFavorites}>Add To Favorites</button> */}
+      {reminderList}
+
+    </div>
+  )}
+  ;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+/**
+
+// RULES table
+// _id, user_id, variable, condition, value, alert
+
+const dictionary = {
+  'wind speed': state.main.currentWindSpeed,
+  'other varname': what it actually is here in the front end,
+  ...
+}
+
+for (let i=0; i < data.length; i++) {
+  const currentRule = data[i];
+
+  if (currentRule.condition === 'greater than') {
+    if (dictionary[currentRule.variable] > currentRule.value) alertsList.push(<Card message=currentRule.alert />);
+  }
+  
+  if (currentRule.condition === 'less than') {
+    if (dictionary[currentRule.variable] < currentRule.value) alertsList.push(<p> message=currentRule.alert </p>);
+  }
+  
+  if (currentRule.condition === 'equal to') {
+    if (dictionary[currentRule.variable] === currentRule.value) alertsList.push(<Card message=currentRule.alert />);
+  }
+
+*/
+
+
 //   const addToFavorites = () => {
 //     fetch('/server', {
 //         method: 'POST',
@@ -104,80 +220,3 @@ const Dashboard = (props) => {
   // make api request with each favorite location -> take the results from that api response
   // drill it down to -> create instances of components displaying weather info for each fav place
   // console.log(`reminders: ${props.reminders[0].message}`)
-
-  
-
-    const onLogout = () => {
-      // ideally also delete the cookies but idk how to that yet
-      // redirect the client to the /login endpoint
-      const navigate = useNavigate();
-      const path = '/login';
-      navigate(path, { replace: true });
-    }
-
-
-
-
-  return (
-    <div id='dashboard'>
-      <nav>
-      <button onClick = {onLogout}>logout</button>
-      <Link to={'/edit'}>
-        <button>
-          Edit your reminders
-        </button>
-      </Link>
-      </nav>
-      <h1>Welcome, {props.nickname}!</h1>
-      <SearchBar dispatchSearchLocation={props.dispatchSearchLocation}/>
-      {/* <Reminders 
-        userId={props.userId} 
-        reminders={props.reminders} /> */}
-      <p>Your Forecast:</p>
-      <CurrentWeather 
-        username={props.username} 
-        city={props.city} 
-        state={props.state} 
-        country={props.country} 
-      currentTemp={props.currentTemp} 
-        currentAQI={props.currentAQI} 
-        currentWindSpeed={props.currentWindSpeed} />
-      {/* <Reminders/> */}
-
-
-      {/* <button id='setFavorite' onClick={addToFavorites}>Add To Favorites</button> */}
-      {/* {reminderList} */}
-
-    </div>
-  )}
-  ;
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
-
-/**
-
-// RULES table
-// _id, user_id, variable, condition, value, alert
-
-const dictionary = {
-  'wind speed': state.main.currentWindSpeed,
-  'other varname': what it actually is here in the front end,
-  ...
-}
-
-for (let i=0; i < data.length; i++) {
-  const currentRule = data[i];
-
-  if (currentRule.condition === 'greater than') {
-    if (dictionary[currentRule.variable] > currentRule.value) alertsList.push(<Card message=currentRule.alert />);
-  }
-  
-  if (currentRule.condition === 'less than') {
-    if (dictionary[currentRule.variable] < currentRule.value) alertsList.push(<p> message=currentRule.alert </p>);
-  }
-  
-  if (currentRule.condition === 'equal to') {
-    if (dictionary[currentRule.variable] === currentRule.value) alertsList.push(<Card message=currentRule.alert />);
-  }
-
-*/
