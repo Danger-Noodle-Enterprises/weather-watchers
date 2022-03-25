@@ -15,13 +15,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.storeUserData(username));
   }, 
   
-  // dispatchAddFavorite: (location) => {
-  //   dispatch(actions.addFavorite(location));
-  // },
+//   dispatchAddFavorite: (location) => {
+//     dispatch(actions.addFavorite(location));
+//   },
 
-  // dispatchUpdateFavorites: (locationsArray) => {
-  //   dispatch(actions.updateFavorites(locationsArray));
-  // }
+//   dispatchUpdateFavorites: (locationsArray) => {
+//     dispatch(actions.updateFavorites(locationsArray));
+//   }
 });
 
 class LoginBox extends Component {
@@ -59,6 +59,11 @@ class LoginBox extends Component {
         fetchStatus = response.status;
         return response.json();
       })
+
+
+
+
+
       .then((data) => {
         console.log('data: ', data);
         if (fetchStatus === 200) {
@@ -68,18 +73,18 @@ class LoginBox extends Component {
           // data.users.username
           this.props.dispatchUsernameStorage({userId: data.username_id, nickname: data.nickname});
 
-          // save returned favorite places array to state
-          fetch(`/user/favorites/${data.username_id}`)
-          .then( response => {
-            const status = response.status;
-            return response.json();
-          })
-          .then( data => {
-            this.props.dispatchUpdateFavorites(data);
-            console.log('Favorites data: ', data);
-            // save array of favorite places to state at state.favorites
+          // // save returned favorite places array to state
+          // fetch(`/user/favorites/${data.username_id}`)
+          // .then( response => {
+          //   const status = response.status;
+          //   return response.json();
+          // })
+          // .then( data => {
+          //   this.props.dispatchUpdateFavorites(data);
+          //   console.log('Favorites data: ', data);
+          //   // save array of favorite places to state at state.favorites
             
-          });
+          // });
 
           // defaulting country to usa
           // the api call below should ideally use the user's IP address to find their nearest location
@@ -111,10 +116,10 @@ class LoginBox extends Component {
   // }
   
   render() {
-    console.log('loggedIn: ', this.state.loggedIn)
-    return this.state.loggedIn ? <Navigate to="/dashboard" /> : (
+    console.log('loggedIn: ', this.state.loggedIn);
+    return this.state.loggedIn ? <Navigate to="/dashboard" /> : ( // <Navigate to="/login"/>;
       <div id="LoginBox">
-        <h1 id='loginHeader'>Breathe Better Air™</h1>
+        <img src="https://i.postimg.cc/bJFm9CBf/WEATHER-WATCHERS-1.png" id='loginHeader'></img>
         <form id="loginForm" onSubmit={this.onSubmit}>
           <div className="inputContainer">
             {/* <span>Username: </span>  */}

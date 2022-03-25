@@ -18,7 +18,7 @@ cookieController.setCookie = async (req, res, next) => {
   // let cookie = req.cookies['app_user']; 
   // res.locals.cookieSet = false; 
   // if (!cookie) {
-  console.log('seting a cookie'); 
+  console.log('cookieController.js: seting a cookie'); 
 
   await crypto.randomBytes(15, async (err, buff) => {
     // use .toString with encoding 'utf8'
@@ -33,16 +33,16 @@ cookieController.setCookie = async (req, res, next) => {
     }
 
     const token = buff.toString('hex');
-    console.log('token: ', token);
-    console.log('token length: ', token.length);
+    console.log('cookieController.js: token: ', token);
+    console.log('cookieController.js: token length: ', token.length);
     res.locals.cookieSet = true;
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080'); // CORS
     res.cookie('board_user', token, {maxAge: 300000, httpOnly: true, secure: true }); // Cookie: board_user = 001203012038sdfsd
-    const queryString = `UPDATE users SET cookie = $1 WHERE username_id = $2 RETURNING *;`;
-    const encryptedToken = await bcrypt.hash(token, saltRounds);
-    const params = [encryptedToken, res.locals.foundUser.username_id];
-    const result = db.query(queryString, params); // maybe await
-    console.log(result);
+    const queryString = 'UPDATE users SET cookie = $1 WHERE username_id = $2 RETURNING *;';
+    // const encryptedToken = await bcrypt.hash(token, saltRounds);
+    const params = [token, res.locals.foundUser.username_id];
+    const result = await db.query(queryString, params); // maybe await
+    // console.log('cookieController.js: sql query result:', result);
     res.append('Set-Cookie', 'board_user=' + token + ';');
     next();
   });
@@ -62,34 +62,42 @@ cookieController.checkCookie = async (req, res, next) => {
   // only invoke next() if there is a valid cookie included in the request
   //   check if the cookie is valid by looking up the cookie value we set on the user's database entry
   // else throw an error that the front end will handle as a redirect to the login page
-  console.log('checking for cookies');
+  console.log('cookieController.js: checking for cookies');
   // check if client sent a cookie
-  const cookie = req.cookies.board_user;
-  console.log(cookie);
+  const cookie = req.cookies['board_user'];
+  // console.log('req: ', req);
+  console.log('cookieController.js: req.cookies: ', req.cookies);
+  console.log('cookieController.js: cookie: ', cookie);
   const queryString = `
-  SELECT 
-  username_id, username, password, nickname, email, tos, city, state, cookie
-  FROM users
-  WHERE cookie = $1;
+    SELECT 
+    username_id, username, password, nickname, email, tos, city, state, cookie
+    FROM users
+    WHERE cookie = $1;
   `;
   const param = [cookie];
-  const result = db.query(queryString, param) // maybe await
-  
-  const match = await bcrypt.compare(cookie, result.rows[0].cookie); 
+  const result = await db.query(queryString, param); // maybe await
+  // console.log('cookieController.js: SQL query result: ', result); 
+  let match;
+  if (result.rowCount === 0) {
+    match = false;    
+  } 
+  else {
+    match = true; // await bcrypt.compare(cookie, result.rows[0].cookie); 
+  }
 
   if (!match) {
     // no cookie: needs to log in
     // currently: doing nothing
-    console.log('no cookie detected');
-    res.locals.foundUser = result.rows[0];
-    res.locals.cookieStatus = false;
+    console.log('cookieController.js: no cookie detected');
+    res.locals.cookieExists = false;
   } else {
     // if cookie was already present 
     // how do we check if cookie is stale?
-    console.log('cookie detected');
+    console.log('cookieController.js: cookie detected');
     res.locals.foundUser = result.rows[0];
-    res.locals.cookieStatus = true;
+    res.locals.cookieExists = true;
   }
+  console.log('cookieController.js: res.locals: ', res.locals);
   next();
   // res.status(200).json({cookieExists: res.locals.cookieStatus});
 }

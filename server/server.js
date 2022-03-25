@@ -8,8 +8,8 @@ const bodyParser = require('body-parser')
 // const bodyParser = require('body-parser');
 // const cookieParser = require('cookie-parser');
 // require in the route handlers
-//
 const userRouter = require('./routers/userRouter');
+const reminderRouter = require('./routers/reminderRouter');
 // declare a variable that specifies which port we are listening on
 const PORT = 3000;
 // create an application for routing HTTP requests, configuring middleware
@@ -29,7 +29,7 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 
 // create a route handler
 app.use('/user', userRouter);
-
+app.use('/reminder', reminderRouter);
 
 // Handles requests made to unknown routes and sends back a 404 error status to the client
 app.use((req, res) => res.sendStatus(404));

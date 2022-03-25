@@ -4,12 +4,12 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: 'Shrikhand', cursive;
+    font-family: sans-serif;
 }
 
 #loginPage {
     background: rgb(255, 255, 238);
-    background: linear-gradient(0deg, rgb(255, 255, 243) 0%, rgb(126, 157, 243) 88%);
+    background: linear-gradient(180deg, rgb(9, 52, 109), rgb(24, 30, 43));
 }
 
 #LoginBox {
@@ -23,7 +23,7 @@
 
 #loginUsernameInput {
     border: 2px solid #ffffff;
-    color: #4189F2;
+    color: rgb(9, 52, 109);
     border-radius: 5px;
     line-height: 2rem;
     font-size: 20px;
@@ -33,7 +33,7 @@
 
 #loginPasswordInput {
     border: 2px solid #ffffff;
-    color: #4189F2;
+    color: rgb(9, 52, 109);
     border-radius: 5px;
     line-height: 2rem;
     font-size: 20px;
@@ -54,7 +54,7 @@
 
 .loginPageButton {
     background-color: #808080;
-    color: #4189F2;
+    color: #e4e6eb;
     border-radius: 12px;
     border: none;
     line-height: 2rem;
@@ -62,13 +62,15 @@
     text-decoration: none;
     text-align: center;
     font-size: 14px;
-    background: white;
+    background: rgb(20, 18, 18);
     transition-duration: .3s;
 }
 
 .loginPageButton:hover {
-    background: #4189F2;
-    color: white;
+    background-image: url('https://imageio.forbes.com/blogs-images/trevornace/files/2017/12/lightning-storm-australia.jpg?fit=bounds&format=jpg&width=960');
+    color: rgb(255, 255, 255);
+    width: 110px;
+    font-weight: bold;
 }
 
 .buttonContainer {
@@ -90,9 +92,9 @@
 
 #loginHeader {
     color: rgb(255, 255, 255);
-    text-shadow: 2px 2px #4189F2;
+    /* text-shadow: 2px 2px #4189F2; */
 }
 
 ::placeholder {
-    color: #b6d0f8;
+    color: #8e9197;
 }

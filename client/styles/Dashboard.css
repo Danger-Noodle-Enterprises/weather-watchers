@@ -1,10 +1,39 @@
-#dashboard {
-  height: 80vh;
+body {
+  background: rgb(9, 52, 109);
+  color: white;
+  
 }
 
-#setFavorite {
-  background-color: #808080;
-  color: #4189F2;
+#dashboard {
+  height: 100%;
+  /* background: linear-gradient(180deg, rgb(9, 52, 109), rgb(24, 30, 43)); */
+  /* margin-bottom: 100%; */
+}
+
+.welcomeHeader {
+  margin-top: 70px; 
+  margin-bottom: 60px;
+}
+
+.nav-buttons {
+  border-radius: 5px;
+  padding : 3px; 
+  color:rgb(9, 52, 109); 
+  margin: 10px 10px;
+
+}
+
+.edit-reminders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+#edit-message {
+  margin-bottom: 30px;
+}
+/* #setFavorite {
   border-radius: 12px;
   border: none;
   line-height: 2rem;
@@ -15,4 +44,4 @@
   background: white;
   transition-duration: .3s;
   margin-top: 10px;
-}
+} */
