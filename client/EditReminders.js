@@ -64,13 +64,47 @@ const EditReminders = (props) => {
 }, []);
 
 
+  function deleteReminder(rec_id) {
+    fetch(`http://localhost:${port}/reminder/${rec_id}`, {
+      method: 'DELETE',
+      headers: {}
+    }).then( response => {
+      if (response.status === 200) {
+        // remove this rule from our state too
+        props.dispatchDeleteReminder(rec_id);
+      }
+    }).catch(
+      // error handling
+      err => console.log('deleteRminder has an error ', err)
+    )
+  }
+
+  function editReminder(rec_obj) {
+    fetch(`http://localhost:${port}/reminder/${rec_obj.rec_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        variable: rec_obj.variable, 
+        condition: rec_obj.condition, 
+        value: rec_obj.value, 
+        message: rec_obj.message
+      }
+    }).then( response => {
+      if (response.status === 200 ) {
+        props.dispatchEditReminder(rec_obj);
+      }
+    })
+  }
+
   const cardsArr = [];
   for (let i = 0; i < props.reminders.length; i += 1) {
     cardsArr.push(
     <EditCards 
       key={i}
-      deleteReminder={props.dispatchDeleteReminder} 
-      updateReminder={props.dispatchUpdateReminder}
+      deleteReminder={deleteReminder} 
+      editReminder={editReminder} 
       reminder={props.reminders[i]}
       // rec_id={props.reminders[i].rec_id}
       // variable={props.reminders[i].variable}

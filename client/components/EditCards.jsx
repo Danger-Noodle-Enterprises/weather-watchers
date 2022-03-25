@@ -2,7 +2,7 @@ import React from 'react';
 // import '../styles/CurrentWeather.css';
 
 const EditCards = props => {
-
+  
   return (
   <div>
     <div className='edit-card'>
@@ -15,12 +15,12 @@ const EditCards = props => {
       <button className='edit-button' 
         onClick={(e) => { 
           e.preventDefault();
-          props.updateReminder(props.rec_id);
+          props.editReminder(props.reminder);
           }}>Edit</button>
       <button className='delete-button'
         onClick={(e) => { 
           e.preventDefault();
-          props.deleteReminder(props.rec_id);
+          props.deleteReminder(props.reminder.rec_id);
           }}>Delete</button>
     </div>
   </div>
