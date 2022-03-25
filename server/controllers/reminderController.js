@@ -36,7 +36,7 @@ reminderController.getReminders = async (req, res, next) => {
 
   try{
     const query = await db.query(`SELECT * FROM recs`); 
-    console.log(query.rows);
+    // console.log(query.rows);
     res.locals.reminders = query.rows; 
     return next(); 
 
