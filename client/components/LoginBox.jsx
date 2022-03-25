@@ -119,7 +119,7 @@ class LoginBox extends Component {
     console.log('loggedIn: ', this.state.loggedIn);
     return this.state.loggedIn ? <Navigate to="/dashboard" /> : ( // <Navigate to="/login"/>;
       <div id="LoginBox">
-        <h1 id='loginHeader'>Breathe Better Air™</h1>
+        <img src="https://i.postimg.cc/bJFm9CBf/WEATHER-WATCHERS-1.png" id='loginHeader'></img>
         <form id="loginForm" onSubmit={this.onSubmit}>
           <div className="inputContainer">
             {/* <span>Username: </span>  */}

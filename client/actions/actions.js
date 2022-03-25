@@ -13,15 +13,20 @@ export const storeUserData = userData => ({
 
 export const addReminder = userData => ({
   type: types.ADD_REMINDER, 
+  payload: userData
+})
+
+export const updateReminders = userData => ({
+  type: types.UPDATE_REMINDERS, 
+  payload: userData
+})
+
+export const editReminder = reminderData => ({
+  type: types.EDIT_REMINDER, 
   payload: reminderData
 })
 
-export const updateReminder = userData => ({
-  type: types.UPDATE_REMINDER, 
-  payload: reminderData
-})
-
-export const deleteReminder = userData => ({
+export const deleteReminder = reminderId => ({
   type: types.DELETE_REMINDER, 
   payload: reminderId
 })

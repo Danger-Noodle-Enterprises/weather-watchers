@@ -25,10 +25,10 @@ CREATE TABLE users(
 CREATE TABLE recs(
    rec_id INT GENERATED ALWAYS AS IDENTITY,
    user_id INT NOT NULL,
-   vairable VARCHAR(25) NOT NULL, 
+   variable VARCHAR(25) NOT NULL, 
    condition VARCHAR(25) NOT NULL,
    value FLOAT(25) NOT NULL, 
-   alert VARCHAR(280) NOT NULL
+   message VARCHAR(280) NOT NULL
 );
 
 CREATE TABLE favorites(
